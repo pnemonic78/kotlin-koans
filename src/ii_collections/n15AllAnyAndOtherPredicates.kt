@@ -27,9 +27,7 @@ fun Shop.checkAllCustomersAreFrom(city: City): Boolean {
 
 fun Shop.hasCustomerFrom(city: City): Boolean {
     // Return true if there is at least one customer from the given city
-    return customers.any {
-        it.isFrom(city)
-    }
+    return customers.any { it.isFrom(city) }
 }
 
 fun Shop.countCustomersFrom(city: City): Int {
