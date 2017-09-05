@@ -11,3 +11,15 @@ enum class TimeInterval {
 }
 
 class DateRange(val start: MyDate, val endInclusive: MyDate)
+
+operator fun MyDate.compareTo(other: MyDate): Int {
+    val y = this.year - other.year
+    if (y != 0) {
+        return y
+    }
+    val m = this.month - other.month
+    if (m != 0) {
+        return m
+    }
+    return this.dayOfMonth - other.dayOfMonth
+}
