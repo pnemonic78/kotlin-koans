@@ -10,8 +10,8 @@ enum class TimeInterval {
     YEAR
 }
 
-class DateRange(val start: MyDate, val endInclusive: MyDate): Iterable<MyDate> {
-    override fun iterator(): Iterator<MyDate>  = DateRangeIterator(start, endInclusive)
+class DateRange(val start: MyDate, val endInclusive: MyDate) : Iterable<MyDate> {
+    override fun iterator(): Iterator<MyDate> = DateRangeIterator(start, endInclusive)
 }
 
 operator fun MyDate.compareTo(other: MyDate): Int {
@@ -39,4 +39,8 @@ class DateRangeIterator(start: MyDate, private val endInclusive: MyDate) : Itera
         date = date.nextDay()
         return next
     }
+}
+
+operator fun MyDate.plus(other: TimeInterval): MyDate {
+    return addTimeIntervals(other, 1)
 }
