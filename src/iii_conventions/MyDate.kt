@@ -10,7 +10,9 @@ enum class TimeInterval {
     YEAR
 }
 
-class DateRange(val start: MyDate, val endInclusive: MyDate)
+class DateRange(val start: MyDate, val endInclusive: MyDate): Iterable<MyDate> {
+    override fun iterator(): Iterator<MyDate>  = DateRangeIterator(start, endInclusive)
+}
 
 operator fun MyDate.compareTo(other: MyDate): Int {
     val y = this.year - other.year
@@ -22,4 +24,19 @@ operator fun MyDate.compareTo(other: MyDate): Int {
         return m
     }
     return this.dayOfMonth - other.dayOfMonth
+}
+
+class DateRangeIterator(start: MyDate, private val endInclusive: MyDate) : Iterator<MyDate> {
+
+    var date: MyDate = start
+
+    override fun hasNext(): Boolean {
+        return date <= endInclusive
+    }
+
+    override fun next(): MyDate {
+        val next = date;
+        date = date.nextDay()
+        return next
+    }
 }
